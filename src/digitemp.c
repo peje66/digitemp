@@ -116,6 +116,7 @@ unsigned char Last2409[9];                      /* Last selected coupler   */
 
 int	global_msec = 10;			/* For ReadCOM delay       */
 int	global_msec_max = 15;
+time_t	last_time;		/* Last time we started samples */
 
 /* ----------------------------------------------------------------------- *
    Print out the program usage
@@ -505,10 +506,10 @@ int log_string( char *line )
 
   if( log_file[0] != 0 )
   {
-    time_t now = time(NULL);
+//     time_t now = time(NULL);
 
     /* update log_file name according to current time */
-    strftime(log_file, sizeof(log_file) - 1, tmp_log_file, gmtime(&now));
+    strftime(log_file, sizeof(log_file) - 1, tmp_log_file, gmtime(&last_time));
 
     if( (fd = open( log_file, O_CREAT | O_WRONLY | O_APPEND,
                           S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH ) ) == -1 )
@@ -2355,7 +2356,7 @@ int main( int argc, char *argv[] )
   int		sample_delay = 0;	/* Delay between samples (SEC)	*/
   unsigned int	x,
   		num_samples = 1;	/* Number of samples 		*/
-  time_t	last_time,		/* Last time we started samples */
+  time_t	/*last_time,*/		/* Last time we started samples */
 		start_time;		/* Starting time		*/
   long int	elapsed_time;		/* Elapsed from start		*/
   struct _roms  sensor_list;            /* Attached Roms                */
